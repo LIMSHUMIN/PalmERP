@@ -4,8 +4,8 @@ from services.supplier_service import SupplierService
 service = SupplierService()
 
 
-suppliers= service.get_all_suppliers()
+result = service.search_supplier("AHMAD")
 
 
-for s in suppliers:
-    print(s)
+for row in result:
+    print(row)

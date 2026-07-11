@@ -12,9 +12,11 @@ class SupplierService:
             return []
 
         try:
+
             cursor = conn.cursor()
 
-            cursor.execute("""
+            cursor.execute(
+                """
                 SELECT
                     SupplierID,
                     SupplierCode,
@@ -24,13 +26,16 @@ class SupplierService:
                     IsActive
                 FROM Suppliers
                 ORDER BY SupplierCode
-            """)
+                """
+            )
 
             rows = cursor.fetchall()
 
             return rows
 
+
         finally:
+
             conn.close()
 
 
@@ -71,6 +76,7 @@ class SupplierService:
                 phone,
                 address
             )
+
 
             conn.commit()
 
@@ -135,6 +141,7 @@ class SupplierService:
 
         except Exception as e:
 
+            print("Update supplier error:")
             print(e)
 
             return False
@@ -146,7 +153,10 @@ class SupplierService:
 
 
 
-    def delete_supplier(self, supplier_id):
+    def delete_supplier(
+        self,
+        supplier_id
+    ):
 
         conn = get_connection()
 
@@ -167,9 +177,106 @@ class SupplierService:
                 supplier_id
             )
 
+
             conn.commit()
 
             return True
+
+
+        except Exception as e:
+
+            print("Delete supplier error:")
+            print(e)
+
+            return False
+
+
+        finally:
+
+            conn.close()
+
+
+
+    def search_supplier(
+        self,
+        keyword
+    ):
+
+        conn = get_connection()
+
+        if conn is None:
+            return []
+
+
+        try:
+
+            cursor = conn.cursor()
+
+
+            sql = """
+            SELECT
+                SupplierID,
+                SupplierCode,
+                SupplierName,
+                Phone,
+                Address,
+                IsActive
+            FROM Suppliers
+
+            WHERE SupplierCode LIKE ?
+            OR SupplierName LIKE ?
+            OR Phone LIKE ?
+
+            ORDER BY SupplierCode
+            """
+
+
+            key = "%" + keyword + "%"
+
+
+            cursor.execute(
+                sql,
+                key,
+                key,
+                key
+            )
+
+
+            rows = cursor.fetchall()
+
+
+            return rows
+
+    def hard_delete_supplier(self, supplier_id):
+
+        conn = get_connection()
+
+        if conn is None:
+            return False
+
+        try:
+
+            cursor = conn.cursor()
+
+            cursor.execute(
+                """
+                DELETE FROM Suppliers
+                WHERE SupplierID=?
+                """,
+                supplier_id
+            )
+
+            conn.commit()
+
+            return True
+
+
+        except Exception as e:
+
+            print("Delete supplier error:")
+            print(e)
+
+            return False
 
 
         finally:
