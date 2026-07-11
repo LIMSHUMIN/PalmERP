@@ -1,17 +1,14 @@
-import sys
 from PySide6.QtWidgets import QApplication
-from ui.supplier.supplier_window import LoginWindow
+
+from ui.login.login_window import LoginWindow
 
 
-def main():
-
-    app = QApplication(sys.argv)
-
-    window = LoginWindow()
-    window.show()
-
-    sys.exit(app.exec())
+app = QApplication([])
 
 
-if __name__ == "__main__":
-    main()
+window = LoginWindow()
+
+window.show()
+
+
+app.exec()

@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import (
     QWidget,
     QLabel,
+    QPushButton,
     QVBoxLayout
 )
 
@@ -26,29 +27,40 @@ class DashboardWindow(QWidget):
     def create_ui(self):
 
         title = QLabel(
-            "Welcome to PalmERP Enterprise"
+            "PalmERP Enterprise Dashboard"
         )
 
-        info = QLabel(
-            """
-            Dashboard
 
-            Purchase Today:
-            RM 0.00
+        self.supplier_button = QPushButton(
+            "Supplier Master"
+        )
 
-            Outstanding Advance:
-            RM 0.00
 
-            Supplier Count:
-            0
-            """
+        self.supplier_button.clicked.connect(
+            self.open_supplier
         )
 
 
         layout = QVBoxLayout()
 
+
         layout.addWidget(title)
 
-        layout.addWidget(info)
+        layout.addWidget(
+            self.supplier_button
+        )
+
 
         self.setLayout(layout)
+
+
+
+    def open_supplier(self):
+
+        from ui.supplier.supplier_window import SupplierWindow
+
+
+        self.supplier = SupplierWindow()
+
+
+        self.supplier.show()
