@@ -3,7 +3,6 @@ from database.connection import get_connection
 
 class SupplierService:
 
-
     def get_all_suppliers(self):
 
         conn = get_connection()
@@ -29,16 +28,20 @@ class SupplierService:
                 """
             )
 
-            rows = cursor.fetchall()
+            return cursor.fetchall()
 
-            return rows
+        except Exception as e:
 
+            print("Get supplier error:")
+            print(e)
+
+            return []
 
         finally:
 
             conn.close()
 
-
+    ####################################################################
 
     def add_supplier(
         self,
@@ -52,7 +55,6 @@ class SupplierService:
 
         if conn is None:
             return False
-
 
         try:
 
@@ -77,11 +79,9 @@ class SupplierService:
                 address
             )
 
-
             conn.commit()
 
             return True
-
 
         except Exception as e:
 
@@ -90,12 +90,11 @@ class SupplierService:
 
             return False
 
-
         finally:
 
             conn.close()
 
-
+    ####################################################################
 
     def update_supplier(
         self,
@@ -110,7 +109,6 @@ class SupplierService:
 
         if conn is None:
             return False
-
 
         try:
 
@@ -133,11 +131,9 @@ class SupplierService:
                 supplier_id
             )
 
-
             conn.commit()
 
             return True
-
 
         except Exception as e:
 
@@ -146,23 +142,18 @@ class SupplierService:
 
             return False
 
-
         finally:
 
             conn.close()
 
+    ####################################################################
 
-
-    def delete_supplier(
-        self,
-        supplier_id
-    ):
+    def delete_supplier(self, supplier_id):
 
         conn = get_connection()
 
         if conn is None:
             return False
-
 
         try:
 
@@ -171,17 +162,15 @@ class SupplierService:
             cursor.execute(
                 """
                 UPDATE Suppliers
-                SET IsActive=0
-                WHERE SupplierID=?
+                SET IsActive = 0
+                WHERE SupplierID = ?
                 """,
                 supplier_id
             )
 
-
             conn.commit()
 
             return True
-
 
         except Exception as e:
 
@@ -190,62 +179,11 @@ class SupplierService:
 
             return False
 
-
         finally:
 
             conn.close()
 
-
-
-    def search_supplier(
-        self,
-        keyword
-    ):
-
-        conn = get_connection()
-
-        if conn is None:
-            return []
-
-
-        try:
-
-            cursor = conn.cursor()
-
-
-            sql = """
-            SELECT
-                SupplierID,
-                SupplierCode,
-                SupplierName,
-                Phone,
-                Address,
-                IsActive
-            FROM Suppliers
-
-            WHERE SupplierCode LIKE ?
-            OR SupplierName LIKE ?
-            OR Phone LIKE ?
-
-            ORDER BY SupplierCode
-            """
-
-
-            key = "%" + keyword + "%"
-
-
-            cursor.execute(
-                sql,
-                key,
-                key,
-                key
-            )
-
-
-            rows = cursor.fetchall()
-
-
-            return rows
+    ####################################################################
 
     def hard_delete_supplier(self, supplier_id):
 
@@ -261,7 +199,7 @@ class SupplierService:
             cursor.execute(
                 """
                 DELETE FROM Suppliers
-                WHERE SupplierID=?
+                WHERE SupplierID = ?
                 """,
                 supplier_id
             )
@@ -270,14 +208,63 @@ class SupplierService:
 
             return True
 
-
         except Exception as e:
 
-            print("Delete supplier error:")
+            print("Hard delete supplier error:")
             print(e)
 
             return False
 
+        finally:
+
+            conn.close()
+
+    ####################################################################
+
+    def search_supplier(self, keyword):
+
+        conn = get_connection()
+
+        if conn is None:
+            return []
+
+        try:
+
+            cursor = conn.cursor()
+
+            sql = """
+            SELECT
+                SupplierID,
+                SupplierCode,
+                SupplierName,
+                Phone,
+                Address,
+                IsActive
+            FROM Suppliers
+            WHERE
+                SupplierCode LIKE ?
+                OR SupplierName LIKE ?
+                OR Phone LIKE ?
+            ORDER BY SupplierCode
+            """
+
+            key = f"%{keyword}%"
+
+            cursor.execute(
+                sql,
+                key,
+                key,
+                key
+            )
+
+            return cursor.fetchall()
+
+        except Exception as e:
+
+            print("Search supplier error:")
+            print(e)
+
+            return []
 
         finally:
 
