@@ -1,3 +1,4 @@
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QFrame,
     QLabel,
@@ -11,28 +12,37 @@ class InfoCard(QFrame):
 
         super().__init__()
 
+        self.setMinimumSize(220,120)
+
         self.setStyleSheet("""
-            QFrame{
-                background:white;
-                border:1px solid #DDDDDD;
-                border-radius:10px;
-            }
+        QFrame{
+            background:white;
+            border:1px solid #DDDDDD;
+            border-radius:10px;
+        }
+
+        QLabel#Title{
+            color:gray;
+            font-size:14px;
+        }
+
+        QLabel#Value{
+            color:#2E7D32;
+            font-size:28px;
+            font-weight:bold;
+        }
         """)
 
         layout = QVBoxLayout(self)
 
-        lbl_title = QLabel(title)
-        lbl_title.setStyleSheet("""
-            color:gray;
-            font-size:14px;
-        """)
+        titleLabel = QLabel(title)
+        titleLabel.setObjectName("Title")
 
-        lbl_value = QLabel(value)
-        lbl_value.setStyleSheet("""
-            font-size:24px;
-            font-weight:bold;
-            color:#2E7D32;
-        """)
+        valueLabel = QLabel(value)
+        valueLabel.setObjectName("Value")
 
-        layout.addWidget(lbl_title)
-        layout.addWidget(lbl_value)
+        valueLabel.setAlignment(Qt.AlignCenter)
+
+        layout.addWidget(titleLabel)
+        layout.addStretch()
+        layout.addWidget(valueLabel)

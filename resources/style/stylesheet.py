@@ -48,4 +48,8 @@ QLabel#Title{
 QLabel#Subtitle{
     color:#757575;
 }
+
+QStackedWidget{
+    background:#F5F7FA;
+}
 """
