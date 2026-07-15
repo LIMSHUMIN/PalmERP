@@ -2,10 +2,13 @@ from PySide6.QtWidgets import (
     QWidget,
     QLabel,
     QVBoxLayout,
-    QGridLayout,
+    QHBoxLayout,
+    QGridLayout
 )
 
 from ui.components.info_card import InfoCard
+from ui.components.action_button import ActionButton
+from ui.components.activity_panel import ActivityPanel
 
 
 class DashboardPage(QWidget):
@@ -19,53 +22,80 @@ class DashboardPage(QWidget):
 
     def build_ui(self):
 
-        layout = QVBoxLayout(self)
+        main_layout = QVBoxLayout(self)
 
         title = QLabel("Dashboard")
+
         title.setStyleSheet("""
-            font-size:26px;
+            font-size:28px;
             font-weight:bold;
         """)
 
-        welcome = QLabel(
-            "Welcome back to PalmERP Enterprise"
+        subtitle = QLabel(
+            "Welcome back, Administrator"
         )
 
-        welcome.setStyleSheet("""
+        subtitle.setStyleSheet("""
             color:gray;
             font-size:14px;
         """)
 
-        layout.addWidget(title)
-        layout.addWidget(welcome)
+        main_layout.addWidget(title)
+        main_layout.addWidget(subtitle)
 
-        layout.addSpacing(20)
+        main_layout.addSpacing(20)
 
-        grid = QGridLayout()
+        # Cards
 
-        grid.setHorizontalSpacing(20)
-        grid.setVerticalSpacing(20)
+        cards = QGridLayout()
 
-        grid.addWidget(
+        cards.addWidget(
             InfoCard("Suppliers","1250"),
             0,0
         )
 
-        grid.addWidget(
+        cards.addWidget(
             InfoCard("Today's FFB","320 MT"),
             0,1
         )
 
-        grid.addWidget(
-            InfoCard("Advance","RM 25,800"),
-            1,0
+        cards.addWidget(
+            InfoCard("Advance","RM25,800"),
+            0,2
         )
 
-        grid.addWidget(
-            InfoCard("Settlement","RM 80,350"),
-            1,1
+        cards.addWidget(
+            InfoCard("Settlement","RM80,350"),
+            0,3
         )
 
-        layout.addLayout(grid)
+        main_layout.addLayout(cards)
 
-        layout.addStretch()
+        main_layout.addSpacing(25)
+
+        # Quick Actions
+
+        quick = QLabel("Quick Actions")
+
+        quick.setStyleSheet("""
+            font-size:18px;
+            font-weight:bold;
+        """)
+
+        main_layout.addWidget(quick)
+
+        button_layout = QHBoxLayout()
+
+        button_layout.addWidget(ActionButton("New Supplier"))
+        button_layout.addWidget(ActionButton("New Purchase"))
+        button_layout.addWidget(ActionButton("Settlement"))
+
+        button_layout.addStretch()
+
+        main_layout.addLayout(button_layout)
+
+        main_layout.addSpacing(20)
+
+        main_layout.addWidget(ActivityPanel())
+
+        main_layout.addStretch()

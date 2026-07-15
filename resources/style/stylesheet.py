@@ -16,7 +16,7 @@ QFrame#Sidebar{
 
 QFrame#TopBar{
     background:white;
-    border-bottom:1px solid #E5E7EB;
+    border-bottom:1px solid #E0E0E0;
 }
 
 QPushButton{

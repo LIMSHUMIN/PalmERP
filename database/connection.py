@@ -1,22 +1,41 @@
 import pyodbc
-from config import Config
+
+from config.config import *
 
 
 def get_connection():
 
-    connection_string = (
-        "DRIVER={ODBC Driver 17 for SQL Server};"
-        f"SERVER={Config.DB_SERVER};"
-        f"DATABASE={Config.DB_DATABASE};"
-        "Trusted_Connection=yes;"
-    )
-
     try:
-        conn = pyodbc.connect(connection_string)
-        print("SQL Server connection successful")
+
+        if USE_WINDOWS_AUTH:
+
+            conn = pyodbc.connect(
+                f"""
+                DRIVER={{ODBC Driver 18 for SQL Server}};
+                SERVER={SERVER};
+                DATABASE={DATABASE};
+                Trusted_Connection=yes;
+                TrustServerCertificate=yes;
+                """
+            )
+
+        else:
+
+            conn = pyodbc.connect(
+                f"""
+                DRIVER={{ODBC Driver 18 for SQL Server}};
+                SERVER={SERVER};
+                DATABASE={DATABASE};
+                UID={USERNAME};
+                PWD={PASSWORD};
+                TrustServerCertificate=yes;
+                """
+            )
+
         return conn
 
     except Exception as e:
-        print("Database connection failed")
+
         print(e)
+
         return None

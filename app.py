@@ -2,21 +2,20 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from ui.main.main_window import MainWindow
-from resources.styles.stylesheet import APP_STYLE
+from ui.auth.login_window import LoginWindow
 
 
 def main():
 
     app = QApplication(sys.argv)
 
-    app.setStyleSheet(APP_STYLE)
+    window = LoginWindow()
 
-    window = MainWindow()
     window.show()
 
     sys.exit(app.exec())
 
 
 if __name__ == "__main__":
+
     main()
