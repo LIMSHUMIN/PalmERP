@@ -108,6 +108,7 @@ class LoginWindow(QWidget):
         }
 
         QLineEdit{
+            color:#000000;
 
             padding:10px;
 
