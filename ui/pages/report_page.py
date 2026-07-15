@@ -1,8 +1,5 @@
-from PySide6.QtWidgets import (
-    QWidget,
-    QLabel,
-    QVBoxLayout
-)
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 
 class ReportPage(QWidget):
@@ -12,12 +9,15 @@ class ReportPage(QWidget):
 
         layout = QVBoxLayout(self)
 
-        title = QLabel("Reports")
+        title = QLabel("Report")
+        title.setAlignment(Qt.AlignCenter)
+
         title.setStyleSheet("""
-            font-size:24px;
+            font-size:28px;
             font-weight:bold;
+            color:#2E7D32;
         """)
 
+        layout.addStretch()
         layout.addWidget(title)
-
         layout.addStretch()

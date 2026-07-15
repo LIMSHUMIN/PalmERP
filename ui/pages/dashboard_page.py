@@ -27,6 +27,7 @@ class DashboardPage(QWidget):
         title = QLabel("Dashboard")
 
         title.setStyleSheet("""
+            color:#222222;
             font-size:28px;
             font-weight:bold;
         """)
@@ -36,7 +37,7 @@ class DashboardPage(QWidget):
         )
 
         subtitle.setStyleSheet("""
-            color:gray;
+            color:#666666;
             font-size:14px;
         """)
 
@@ -78,6 +79,7 @@ class DashboardPage(QWidget):
         quick = QLabel("Quick Actions")
 
         quick.setStyleSheet("""
+            color:#222222;
             font-size:18px;
             font-weight:bold;
         """)

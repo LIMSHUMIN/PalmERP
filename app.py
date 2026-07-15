@@ -11,6 +11,9 @@ def main():
 
     window = LoginWindow()
 
+    with open("resources/style/style.qss", "r") as f:
+    app.setStyleSheet(f.read())
+    
     window.show()
 
     sys.exit(app.exec())

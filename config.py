@@ -1,10 +1,14 @@
-import os
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
-class Config:
-    DB_SERVER = os.getenv("DB_SERVER")
-    DB_DATABASE = os.getenv("DB_DATABASE")
-    DB_USERNAME = os.getenv("DB_USERNAME")
-    DB_PASSWORD = os.getenv("DB_PASSWORD")
+SERVER = os.getenv("SERVER")
+DATABASE = os.getenv("DATABASE")
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
+
+USE_WINDOWS_AUTH = os.getenv(
+    "USE_WINDOWS_AUTH",
+    "True"
+).lower() == "true"

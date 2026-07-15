@@ -1,9 +1,0 @@
-SERVER = "localhost\\SQLEXPRESS"
-
-DATABASE = "PalmERP"
-
-USERNAME = ""
-
-PASSWORD = ""
-
-USE_WINDOWS_AUTH = True

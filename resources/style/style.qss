@@ -1,0 +1,112 @@
+/* ===========================
+   Whole Application
+=========================== */
+
+QMainWindow,
+QWidget
+{
+    background:#F5F7FA;
+    color:white;
+    font-size:10pt;
+    font-family:"Segoe UI";
+}
+
+/* ===========================
+   Labels
+=========================== */
+
+QLabel
+{
+    color:#333333;
+    background:transparent;
+}
+
+/* ===========================
+   GroupBox
+=========================== */
+
+QGroupBox
+{
+    background:white;
+    border:1px solid #DCDCDC;
+    border-radius:8px;
+    margin-top:10px;
+    font-weight:bold;
+    color:#222;
+}
+
+QGroupBox::title
+{
+    subcontrol-origin:margin;
+    left:12px;
+    padding:0 5px;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+QPushButton
+{
+    background:#2E7D32;
+    color:222222;
+    border:none;
+    border-radius:6px;
+    padding:8px;
+}
+
+QPushButton:hover
+{
+    background:#43A047;
+}
+
+QPushButton:pressed
+{
+    background:#1B5E20;
+}
+
+/* ===========================
+   Table
+=========================== */
+
+QTableWidget
+{
+    background:white;
+    alternate-background-color:#F7F7F7;
+    gridline-color:#E0E0E0;
+    color:#222;
+}
+
+QHeaderView::section
+{
+    background:#F0F0F0;
+    color:#222;
+    padding:5px;
+    border:none;
+}
+
+/* ===========================
+   Line Edit
+=========================== */
+
+QLineEdit
+{
+    background:white;
+    color:#222;
+    border:1px solid #CCCCCC;
+    border-radius:4px;
+    padding:5px;
+}
+
+/* ===========================
+   ComboBox
+=========================== */
+
+QComboBox
+{
+    background:white;
+    color:#222;
+    border:1px solid #CCCCCC;
+    border-radius:4px;
+    padding:5px;
+}

@@ -38,7 +38,8 @@ class TopBar(QFrame):
 
         self.branch = QLabel("ABC Palm Oil Sdn Bhd")
         self.branch.setStyleSheet("""
-            color:gray;
+            background:white;
+            border-bottom:1px solid #dddddd;
             font-size:13px;
         """)
 
